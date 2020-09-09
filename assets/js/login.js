@@ -1,4 +1,5 @@
 window.onload = function () {
+  // 获取
   var linkReg = document.querySelector("#reg")
   var linkLog = document.querySelector("#log")
   var regBox = document.querySelector(".reg-box")
