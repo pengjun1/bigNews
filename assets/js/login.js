@@ -62,8 +62,7 @@ window.onload = function () {
         localStorage.setItem("Autorization", res.token)
         localStorage.getItem("Autorization")
         //登录成功跳转页面
-        // location.href = "http://www.baidu.com"
-        // location.href = "/index.html"
+        location.href = "/index.html"
       }
     })
   })
