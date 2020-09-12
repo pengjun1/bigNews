@@ -3,113 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>基本资料</title>
-  <style>
-    body {
-      background-color: #F2F3F5;
-    }
+  <title>Document</title>
 
-    .form {
-      background-color: white;
-      padding: 5px 30px;
-    }
-
-    .form .content {
-      padding: 20px 40px;
-      font-size: 10px;
-      border-top: 1px solid #eee;
-    }
-
-    .form .content input {
-      width: 250px;
-      height: 30px;
-      margin: 5px 10px;
-      padding: 0 10px;
-      border: 1px solid #eee;
-      outline: none;
-    }
-
-    .form button {
-      cursor: pointer;
-      padding: 7px 10px;
-      margin: 5px;
-      color: #666;
-      outline: none;
-      border: 1px solid #cccccc;
-      background-color: #fff;
-    }
-
-    .form button.submit {
-      margin-left: 100px;
-      background-color: #009688;
-      color: #eee;
-    }
-  </style>
+  <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
+  <link rel="stylesheet" href="../assets/css/user-info.css">
+  <script src="../assets/lib/layui/layui.all.js"></script>
+  <script src="../assets/lib/jquery.js"></script>
+  <script src="../assets/js/baseAPI.js"></script>
+  <script src="../assets/js/user-info.js"></script>
 </head>
 <body>
-  <form class="form">
-    <h5 class="title">修改用户信息</h5>
-    <div class="content">
-      登录名称 <input class="username" name="username" type="text" disabled><br>
-      用户昵称 <input class="nickname" name="nickname" type="text" placeholder="请输入用户昵称"><br>
-      用户邮箱 <input class="email" name="email" type="text" placeholder="请输入邮箱地址"><br>
-    </div>
-    <button class="submit" type="submit">提交修改</button>
-    <button class="restart">重置</button>
-  </form>
+  <!-- 卡片结构 -->
+  <div class="layui-card">
+    <div class="layui-card-header">修改用户信息</div>
+    <form class="layui-form formUserInfo" id="formUserInfo">
+      <div class="layui-form-item">
+        <input type="hidden" name="id" />
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">登录名称</label>
+        <div class="layui-input-block">
+          <input type="text" name="username" value="pengjun" readonly required lay-verify="required|username"
+            placeholder="请输入登录名称" autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">用户昵称</label>
+        <div class="layui-input-block">
+          <input type="text" name="nickname" required lay-verify="required|nickname" placeholder="请输入用户昵称"
+            autocomplete="off" class="layui-input">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <label class="layui-form-label">用户邮箱</label>
+        <div class="layui-input-block">
+          <input type="text" name="email" required lay-verify="required|email" placeholder="请输入用户邮箱" autocomplete="off"
+            class="layui-input" value="123456@qq.com">
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <div class="layui-input-block">
+          <button class="layui-btn" lay-submit lay-filter="formDemo">提交修改</button>
+          <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+        </div>
+      </div>
+      <div class="layui-form-item"></div>
+    </form>
+  </div>
 </body>
-<link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
-<script src="../assets/lib/jquery.js"></script>
-<script src="../assets/lib/layui/layui.all.js"></script>
-<script src="../assets/js/baseAPI.js"></script>
-<script>
-  //获取用户信息,渲染登录名称,并禁用
-  $.ajax({
-    type: "get",
-    url: "/my/userinfo",
-    headers: { Authorization: localStorage.getItem("Authorization") },
-    success: function (res) {
-      $(".username").val(res.data.username)
-    }
-  })
-  //提交时,验证昵称和邮箱格式
-  $(".form").on("submit", function (e) {
-    console.log($(this).serialize());
-
-    e.preventDefault()
-    var nicknameReg = /^[0-9a-zA-Z]{2,16}$/
-    var emailReg = /^[0-9a-zA-Z]{6,16}@[1-9a-zA-Z]{2,6}.com$/
-    if (!nicknameReg.test($(".nickname").val())) {
-      return layer.msg("昵称格式不正确,必须为数字,字母组合");
-    }
-    if (!emailReg.test($(".email").val())) {
-      return layer.msg("邮箱格式不正确,必须为数字,字母组合,且格式必须为xxx@xxx.com");
-    }
-    $.ajax({
-      method: 'post',
-      url: '/my/userinfo',
-      data: $(".form").serialize(),
-      headers: { Authorization: localStorage.getItem("Authorization") },
-      success: function (res) {
-        console.log(res);
-        if (res.status !== 0) {
-          return layer.msg('更新用户信息失败！')
-        }
-        layer.msg('更新用户信息成功！')
-        $.ajax({
-          type: "get",
-          url: "/my/userinfo",
-          headers: { Authorization: localStorage.getItem("Authorization") },
-          success: function (res) {
-            console.log(res);
-            $(".nickname").val(res.data.nickname)
-            $(".welcome").html("欢迎您 " + $(".nickname").val())
-          }
-        })
-      }
-    })
-    //
-
-  })
-</script>
 </html>

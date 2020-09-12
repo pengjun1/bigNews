@@ -32,7 +32,7 @@ window.onload = function () {
   $(".reg-box form").on("submit", function (e) {
     e.preventDefault()
     $.post(
-      "http://ajax.frontend.itheima.net/api/reguser",
+      "/api/reguser",
       {
         username: $(".reg-box .username").val(),
         password: $(".reg-box .password").val()
@@ -60,7 +60,6 @@ window.onload = function () {
         layer.msg(res.message)
         //获取token,存储到本地
         localStorage.setItem("token", res.token)
-        localStorage.getItem("token")
         //登录成功跳转页面
         location.href = "./index.html"
       }

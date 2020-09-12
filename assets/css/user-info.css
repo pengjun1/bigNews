@@ -1,0 +1,16 @@
+
+    html,
+    body {
+      padding: 0;
+      margin: 0;
+      background-color: #ccc;
+    }
+
+    body {
+      padding: 15px;
+
+    }
+
+    input.layui-input {
+      width: 300px;
+    }

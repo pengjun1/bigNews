@@ -12,10 +12,9 @@ $(function () {
       success: function (res) {
         console.log(res);
         if (res.status !== 0) {
-          layui.layer.msg("获取用户信息失败")
-          localStorage.removeItem("token")
-          location.href = "./login.html"
-          return
+          return layui.layer.msg("获取用户信息失败")
+          // localStorage.removeItem("token")
+
         }
         layui.layer.msg("获取用户信息成功")
         //渲染用户头像
