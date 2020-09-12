@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="./assets/fonts/iconfont.css">
   <script src="./assets/lib/jquery.js"></script>
   <script src="./assets/lib/echarts.min.js"></script>
-
 </head>
 <body class="layui-layout-body">
   <div class="layui-layout layui-layout-admin">
@@ -33,16 +32,17 @@
             <dd><a href="">修改密码</a></dd>
           </dl>
         </li>
-        <li class="layui-nav-item"><a href=""><span class="iconfont icon-tuichu"></span>退出</a></li>
+        <li class="layui-nav-item"><a class="btn-exit" href="javascript:;"><span
+              class="iconfont icon-tuichu"></span>退出</a></li>
       </ul>
     </div>
     <div class="layui-side layui-bg-black">
       <div class="layui-side-scroll">
         <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
         <div class="userinfo">
-          <img class="img-avatar layui-nav-img" src="http://t.cn/RCzsdCq">
-          <span class="text-avatar">A</span>
-          <span class="welcome">欢迎 xxx</span>
+          <img class="img-avatar layui-nav-img" src=""><i class="vip">vip</i>
+          <span class="text-avatar"></span>
+          <span class="welcome"></span>
         </div>
         <ul class="layui-nav layui-nav-tree" lay-shrink='all' lay-filter="test">
           <li class="layui-nav-item layui-nav-itemed">
@@ -52,9 +52,9 @@
           <li class="layui-nav-item">
             <a href="javascript:;"><span class="iconfont icon-16"></span>文章管理</a>
             <dl class="layui-nav-child">
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i> 文章类别</a></dd>
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i> 文章列表</a></dd>
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i> 发布文章</a></dd>
+              <dd><a target="fm" href="javascript:;"><i class="layui-icon layui-icon-app"></i> 文章类别</a></dd>
+              <dd><a target="fm" href="javascript:;"><i class="layui-icon layui-icon-app"></i> 文章列表</a></dd>
+              <dd><a target="fm" href="javascript:;"><i class="layui-icon layui-icon-app"></i> 发布文章</a></dd>
             </dl>
           </li>
 
@@ -62,9 +62,9 @@
           <li class="layui-nav-item">
             <a href="javascript:;"><span class="iconfont icon-user"></span>个人中心</a>
             <dl class="layui-nav-child">
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i> 基本资料</a></dd>
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i> 更换头像</a></dd>
-              <dd><a href="javascript:;"><i class="layui-icon layui-icon-app"></i> 重置密码</a></dd>
+              <dd><a target="fm" href="./user/user-info.html"><i class="layui-icon layui-icon-app"></i> 基本资料</a></dd>
+              <dd><a target="fm" href="./user/user-avatar.html"><i class="layui-icon layui-icon-app"></i> 更换头像</a></dd>
+              <dd><a target="fm" href="./user/user-pwd.html"><i class="layui-icon layui-icon-app"></i> 重置密码</a></dd>
             </dl>
           </li>
         </ul>
@@ -82,6 +82,9 @@
     </div>
   </div>
 </body>
+<script src="./assets/js/baseAPI.js"></script>
 <script src="./assets/lib/layui/layui.all.js"></script>
+
 <script src="./assets/js/index.js"></script>
+
 </html>

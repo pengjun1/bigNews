@@ -24,4 +24,12 @@ iframe{
   line-height: 30px;
   background-color: #009688;
 }
+.vip{
+  position: absolute;
+  left: 60px;
+  top: 10px;
+  color: gold;
+  font-weight: 700;
+  font-size: 10px;
+}
 

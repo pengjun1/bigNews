@@ -59,10 +59,10 @@ window.onload = function () {
         console.log(res);
         layer.msg(res.message)
         //获取token,存储到本地
-        localStorage.setItem("Autorization", res.token)
-        localStorage.getItem("Autorization")
+        localStorage.setItem("Authorization", res.token)
+        localStorage.getItem("Authorization")
         //登录成功跳转页面
-        location.href = "/index.html"
+        location.href = "./index.html"
       }
     })
   })
