@@ -59,8 +59,8 @@ window.onload = function () {
         console.log(res);
         layer.msg(res.message)
         //获取token,存储到本地
-        localStorage.setItem("Authorization", res.token)
-        localStorage.getItem("Authorization")
+        localStorage.setItem("token", res.token)
+        localStorage.getItem("token")
         //登录成功跳转页面
         location.href = "./index.html"
       }

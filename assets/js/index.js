@@ -7,12 +7,15 @@ $(function () {
       method: "get",
       url: "/my/userinfo",
       headers: {
-        Authorization: localStorage.getItem("Authorization")
+        Authorization: localStorage.getItem("token")
       },
       success: function (res) {
         console.log(res);
         if (res.status !== 0) {
-          return layui.layer.msg("获取用户信息失败")
+          layui.layer.msg("获取用户信息失败")
+          localStorage.removeItem("token")
+          location.href = "./login.html"
+          return
         }
         layui.layer.msg("获取用户信息成功")
         //渲染用户头像
@@ -42,7 +45,7 @@ $(function () {
   // 退出按钮
   $(".btn-exit").on("click", function () {
     layer.confirm('确定退出登录?', { icon: 3, title: '提示' }, function (index) {
-      localStorage.removeItem("Authorization")
+      localStorage.removeItem("token")
       location.href = "/login.html"
       layer.close(index);
     })
