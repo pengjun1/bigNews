@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>大事件-更换头像</title>
+  <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
+  <link rel="stylesheet" href="../assets/css/user-info.css">
+  <link rel="stylesheet" href="../assets/css/user-avatar.css">
+  <link rel="stylesheet" href="../assets/lib/cropper/cropper.css">
+  <script src="../assets/lib/layui/layui.all.js"></script>
+  <script src="../assets/lib/jquery.js"></script>
+  <script src="../assets/lib/cropper/Cropper.js"></script>
+  <script src="../assets/lib/cropper/jquery-cropper.js"></script>
+  <script src="../assets/js/baseAPI.js"></script>
+  <script src="../assets/js/user-avatar.js"></script>
+</head>
+<body>
+  <div class="layui-card">
+    <div class="layui-card-header">更换头像</div>
+    <div class="layui-card-body">
+      <div class="layui-form-item">
+        <!-- 选择封面区域 -->
+        <div class="layui-input-block cover-box">
+          <!-- 左侧裁剪区域 -->
+          <div class="cover-left">
+            <img id="image" src="/assets/images/sample2.jpg" alt="" />
+          </div>
+          <!-- 右侧预览区域和选择封面区域 -->
+          <div class="cover-right">
+            <!-- 预览的区域 -->
+            <div class="img-preview"></div>
+          </div>
+        </div>
+      </div>
+      <div class="layui-form-item">
+        <!-- 选择封面按钮 -->
+        <input type="file" name="image" accept="image/jpg,image/png" style="display:none" class="file">
+        <button type="button" class="layui-btn" id="btnChooseImage">上传</button>
+        <button type="button" class="layui-btn layui-btn-danger" id="btnUpload">确定</button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
