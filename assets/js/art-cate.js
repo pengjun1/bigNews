@@ -12,7 +12,7 @@ $(function () {
         console.log(res);
         if (res.status !== 0)
           layui.layer.msg("获取文章列表失败")
-        layui.layer.msg("获取文章列表成功")
+        // layui.layer.msg("获取文章列表成功")
         //渲染文章列表
         var tableHTML = template("tpl-table", res)
         $("tbody").html(tableHTML)
@@ -21,8 +21,9 @@ $(function () {
   }
 
   //添加类别按钮,点击弹出层
+  var addCateIndex
   $("#btnAddList").on('click', function () {
-    var addCateIndex = layui.layer.open({
+    addCateIndex = layui.layer.open({
       type: 1,
       area: ['500px', '250px'],
       title: '添加文章分类',
@@ -31,7 +32,8 @@ $(function () {
   })
 
   //添加文章分类
-  $("#addCateForm").on('submit', function (e) {
+  $("body").on('submit', "#addCateForm", function (e) {
+    console.log($(this).serialize());
     e.preventDefault()
     $.ajax({
       url: '/my/article/addcates',
@@ -41,11 +43,10 @@ $(function () {
         Authorization: localStorage.getItem("token")
       },
       success: function (res) {
-        console.log(666);
         console.log(res);
         if (res.status !== 0)
           return layui.layer.msg("添加分类失败")
-        layui.layer.msg("添加分类成功")
+        // layui.layer.msg("添加分类成功")
         getCateList()
         layui.layer.close(addCateIndex)
       }
@@ -55,8 +56,9 @@ $(function () {
 
 
   // 点击编辑按钮,弹出弹框
+  var editCateIndex
   $("body").on("click", "#btnEdit", function () {
-    var editCateIndex = layui.layer.open({
+    editCateIndex = layui.layer.open({
       type: 1,
       area: ['500px', '250px'],
       title: '修改文章分类',
@@ -72,8 +74,8 @@ $(function () {
       success: function (res) {
         console.log(res);
         if (res.status !== 0)
-          return layui.layer.msg("获取该条数据失败")
-        layui.layer.msg("获取该条数据成功")
+          return layui.layer.msg(res.message)
+        // layui.layer.msg("获取该条数据成功")
         layui.form.val("edit-form", res.data)
         // getCateList()
 
@@ -87,7 +89,7 @@ $(function () {
     console.log($(this).serialize());
     $.ajax({
       url: '/my/article/updatecate',
-      method: 'post',
+      type: 'post',
       date: $(this).serialize(),
       headers: {
         Authorization: localStorage.getItem("token")
@@ -95,8 +97,8 @@ $(function () {
       success: function (res) {
         console.log(res);
         if (res.status !== 0)
-          return layui.layer.msg("获取该条数据失败")
-        layui.layer.msg("获取该条数据成功")
+          return layui.layer.msg(res.message)
+        // layui.layer.msg("获取该条数据成功")
         // getCateList()
         layui.layer.close(editCateIndex)
       }
@@ -118,13 +120,30 @@ $(function () {
           console.log(res);
           if (res.status !== 0)
             return layui.layer.msg(res.message)
-          layui.layer.msg(res.message)
+          // layui.layer.msg(res.message)
           getCateList()
-
           layui.layer.close(delCateIndex)
         }
       })
     });
   })
+
+
+
+  $.ajax({
+    url: '/my/article/updatecate',
+    type: 'post',
+    date: 'Id=1&name=666&alias=666',
+    headers: {
+      Authorization: localStorage.getItem("token")
+    },
+    success: function (res) {
+      console.log(res)
+    }
+  })
+
 })
+
+
+
 
