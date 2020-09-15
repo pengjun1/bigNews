@@ -8,7 +8,6 @@ $(function () {
     state: ""    //发布状态
   }
 
-
   //获取文章列表
   initTable()
   // 获取文章列表数据的方法
@@ -55,7 +54,7 @@ $(function () {
     })
   }
 
-  //筛选文章列表
+  // 筛选文章
   $("#form-search").on("submit", function (e) {
     e.preventDefault()
     q.cate_id = $("#form-search [name='cate_id']").val()
@@ -63,7 +62,7 @@ $(function () {
     initTable()
   })
 
-  // 渲染分页按钮
+  // 分页按钮
   function renderPage(total) {
     //执行一个laypage实例
     layui.laypage.render({
@@ -71,7 +70,7 @@ $(function () {
       , count: total //数据总数，从服务端得到
       , limit: q.pagesize//每页多少条数据
       , curr: q.pagenum//当前默认选择页数
-      , limits: [1, 2, 5, 10, 15, 20]
+      , limits: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
       , layout: ["count", "limit", "prev", "page", "next", "skip"]
       //分页发生切换时触发回调
       , jump: function (obj, first) {
@@ -85,4 +84,39 @@ $(function () {
       }
     })
   }
+
+  // 编辑按钮
+  $("body").on("click", "#btnEdit", function () {
+    var artID = $(this).attr('data-id')
+
+  })
+
+  // 删除按钮
+  $("body").on("click", "#btnDel", function () {
+    //获取当前删除按钮ID
+    var artID = $(this).attr('data-id')
+    //删除弹框
+    layui.layer.confirm("是否删除文章?", { icon: 3, titlt: "提示" }, function (index) {
+      //根据ID,发起删除文章请求
+      $.ajax({
+        url: "/my/article/delete/" + artID,
+        type: "get",
+        headers: {
+          Authorization: localStorage.getItem("token")
+        },
+        success: function (res) {
+          if (res.status !== 0)
+            return layui.layer.msg(res.message)
+          layui.layer.msg(res.message)
+          //当前页文章个数
+          len = $("#btnDel").length
+          //文章个数为1,则页码数-1
+          if (len == 1)
+            // 页码值最少是1
+            q.pagenum = q.pagenum === 1 ? 1 : q.pagenum - 1
+          initTable()
+        }
+      })
+    })
+  })
 })

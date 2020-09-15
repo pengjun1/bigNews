@@ -72,6 +72,8 @@
   <script src="/assets/lib/template-web.js"></script>
   <script src="/assets/js/baseAPI.js"></script>
 
+
+  <!-- 文章列表模板 -->
   <script type="text/html" id="tpl-table">
   {{each data}}
   <tr>
@@ -80,14 +82,14 @@
     <td>{{$value.pub_date}}</td>
     <td>{{$value.state}}</td>
     <td>
-      <button type="button" class="layui-btn layui-btn-xs">编辑</button>
-      <button type="button" class="layui-btn layui-btn-danger layui-btn-xs">删除</button>
+      <button type="button" class="layui-btn layui-btn-xs"  data-id="{{$value.Id}}" id='btnEdit'>编辑</button>
+      <button type="button" class="layui-btn layui-btn-danger layui-btn-xs" data-id="{{$value.Id}}" id="btnDel">删除</button>
     </td>
   </tr>
   {{/each}}
 </script>
 
-
+  <!-- 文章分类模板 -->
   <script type="text/html" id="tpl-catelist">
             <option value="">所有分类</option>
             {{each data}}
