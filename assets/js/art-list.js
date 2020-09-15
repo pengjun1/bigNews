@@ -27,6 +27,7 @@ $(function () {
         // 使用模板引擎渲染页面的数据
         var htmlStr = template('tpl-table', res)
         $('tbody').html(htmlStr)
+        renderPage(res.total)
       }
     })
   }
@@ -62,5 +63,26 @@ $(function () {
     initTable()
   })
 
-
+  // 渲染分页按钮
+  function renderPage(total) {
+    //执行一个laypage实例
+    layui.laypage.render({
+      elem: 'pageBox' //注意，这里是 ID，不用加 # 号
+      , count: total //数据总数，从服务端得到
+      , limit: q.pagesize//每页多少条数据
+      , curr: q.pagenum//当前默认选择页数
+      , limits: [1, 2, 5, 10, 15, 20]
+      , layout: ["count", "limit", "prev", "page", "next", "skip"]
+      //分页发生切换时触发回调
+      , jump: function (obj, first) {
+        //first为true,代表初始化,不执行代码,,防止递归
+        //first为undefined,代表点击切换页码,执行代码
+        q.pagenum = obj.curr
+        q.pagesize = obj.limit
+        if (!first) {
+          initTable()
+        }
+      }
+    })
+  }
 })
